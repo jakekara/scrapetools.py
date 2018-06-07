@@ -10,7 +10,7 @@
 # --------------------------
 
 import requests, os
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 # For setting up directory structure to store scraped data
 def makedir(directory):
@@ -34,8 +34,8 @@ def download_bin(url,output_file):
 # match_term is case-insensitive, and should probably be used for file extensions
 # base_url is a function to prepend a base_url, default does nothing
 # fname is a function to return a relative path to the output filename
-def get_files(html, base_url=lambda x: x, match_term=".csv", fname=lambda x: x):
-    soup = BeautifulSoup(html)
+def get_files(html, base_url=lambda x: x, match_term=".xls", fname=lambda x: x):
+    soup = BeautifulSoup(html, "html.parser")
     links = soup.findAll("a")
     for link in links:
         if link["href"] == None:
